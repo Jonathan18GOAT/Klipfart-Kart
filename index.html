@@ -102,11 +102,7 @@
     <tbody></tbody>
     <tfoot>
       <tr>
-        <td>Dhamakar Deals (15% off)</td>
-        <td id="discount">- ₹0.00</td>
-      </tr>
-      <tr>
-        <td>Amt. Payable</td>
+        <td>Total Amount</td>
         <td id="finalAmount">₹0.00</td>
       </tr>
     </tfoot>
@@ -143,7 +139,6 @@
   const select = document.getElementById('productSelect');
   const tbody = document.querySelector('#cartTable tbody');
   const cartTable = document.getElementById('cartTable');
-  const discountEl = document.getElementById('discount');
   const finalAmountEl = document.getElementById('finalAmount');
   const thankyouMessage = document.getElementById('thankyouMessage');
 
@@ -164,17 +159,12 @@
 
     cart.push(product);
     updateCartTable();
-
-    // ✅ Reset the dropdown
     select.selectedIndex = 0;
   }
 
-  // Listen for change
   select.addEventListener('change', () => {
     const selectedName = select.value;
-    if (selectedName) {
-      addToCart(selectedName);
-    }
+    if (selectedName) addToCart(selectedName);
   });
 
   function updateCartTable() {
@@ -190,11 +180,7 @@
       total += p.price;
     });
 
-    const discount = total * 0.15;
-    const final = total - discount;
-
-    discountEl.textContent = `- ₹${discount.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-    finalAmountEl.textContent = `₹${final.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+    finalAmountEl.textContent = `₹${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
   }
 
   function checkout() {
@@ -202,13 +188,12 @@
       alert("Add at least one product to checkout!");
       return;
     }
-    const total = cart.reduce((sum, p) => sum + p.price, 0);
-    const discount = total * 0.15;
-    const final = total - discount;
 
-    thankyouMessage.innerHTML = `✅ Thank you! Your total is ₹${final.toLocaleString(undefined, { maximumFractionDigits: 2 })}. Make payment <a href="https://sites.google.com/view/klipfartkart/home" target="_blank">here</a>.`;
+    const total = cart.reduce((sum, p) => sum + p.price, 0);
+    thankyouMessage.innerHTML = `✅ Thank you! Your total is ₹${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}. Make payment <a href="https://sites.google.com/view/klipfartkart/home" target="_blank">here</a>.`;
   }
 </script>
 
 </body>
 </html>
+
