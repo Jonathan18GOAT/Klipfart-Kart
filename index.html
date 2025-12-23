@@ -6,7 +6,7 @@
   <title>Your Kart</title>
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background-color: #fff;
       margin: 0;
       padding: 0;
@@ -28,10 +28,6 @@
       margin: 40px auto;
       padding: 0 20px;
     }
-
-    h2 { font-size: 24px; margin-bottom: 10px; }
-    label, select { font-size: 16px; }
-    select { margin-left: 10px; padding: 5px; }
 
     table {
       width: 100%;
@@ -55,30 +51,18 @@
     .btn {
       margin-top: 20px;
       padding: 10px 20px;
-      font-size: 16px;
-      background-color: white;
-      color: black;
       border: 2px solid black;
-      border-radius: 4px;
+      background-color: white;
       cursor: pointer;
-    }
-
-    .btn:hover {
-      background-color: #f4f4f4;
     }
 
     .thankyou {
       margin-top: 20px;
       font-size: 18px;
-      color: #333;
-    }
-
-    .thankyou a {
-      color: #007BFF;
-      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -87,6 +71,7 @@
 
 <div class="container">
   <h2>Product Selection</h2>
+
   <label for="productSelect">Choose a product:</label>
   <select id="productSelect">
     <option value="">-- Select a product --</option>
@@ -99,10 +84,16 @@
         <th>Price (₹)</th>
       </tr>
     </thead>
+
     <tbody></tbody>
+
     <tfoot>
       <tr>
-        <td>Total Amount</td>
+        <td>Winter Wonderland Deals (15% off)</td>
+        <td id="discountAmount">-₹0.00</td>
+      </tr>
+      <tr>
+        <td>Total Amount Payable</td>
         <td id="finalAmount">₹0.00</td>
       </tr>
     </tfoot>
@@ -113,6 +104,8 @@
 </div>
 
 <script>
+  const DISCOUNT_RATE = 0.15;
+
   const products = [
     { name: "Abbel iPhone", price: 73655 },
     { name: "Samdanced Galaxy S24", price: 103300 },
@@ -140,6 +133,7 @@
   const tbody = document.querySelector('#cartTable tbody');
   const cartTable = document.getElementById('cartTable');
   const finalAmountEl = document.getElementById('finalAmount');
+  const discountEl = document.getElementById('discountAmount');
   const thankyouMessage = document.getElementById('thankyouMessage');
 
   let cart = [];
@@ -152,35 +146,33 @@
     select.appendChild(opt);
   });
 
-  // Add selected product to cart
-  function addToCart(productName) {
-    const product = products.find(p => p.name === productName);
+  select.addEventListener('change', () => {
+    const product = products.find(p => p.name === select.value);
     if (!product) return;
 
     cart.push(product);
     updateCartTable();
-    select.selectedIndex = 0;
-  }
-
-  select.addEventListener('change', () => {
-    const selectedName = select.value;
-    if (selectedName) addToCart(selectedName);
+    select.value = "";
   });
 
   function updateCartTable() {
     cartTable.style.display = "table";
     tbody.innerHTML = "";
 
-    let total = 0;
+    let subtotal = 0;
 
     cart.forEach(p => {
+      subtotal += p.price;
       const row = document.createElement('tr');
       row.innerHTML = `<td>${p.name}</td><td>₹${p.price.toLocaleString()}</td>`;
       tbody.appendChild(row);
-      total += p.price;
     });
 
-    finalAmountEl.textContent = `₹${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+    const discount = subtotal * DISCOUNT_RATE;
+    const finalTotal = subtotal - discount;
+
+    discountEl.textContent = `-₹${discount.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+    finalAmountEl.textContent = `₹${finalTotal.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
   }
 
   function checkout() {
@@ -189,11 +181,20 @@
       return;
     }
 
-    const total = cart.reduce((sum, p) => sum + p.price, 0);
-    thankyouMessage.innerHTML = `✅ Thank you! Your total is ₹${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}. Make payment <a href="https://sites.google.com/view/klipfartkart/home" target="_blank">here</a>.`;
+    const subtotal = cart.reduce((sum, p) => sum + p.price, 0);
+    const discount = subtotal * DISCOUNT_RATE;
+    const total = subtotal - discount;
+
+    thankyouMessage.innerHTML = `
+      ✅ Thank you! Your total after Winter Wonderland discount is
+      <strong>₹${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong>.
+      Make payment <a href="https://sites.google.com/view/klipfartkart/home" target="_blank">here</a>.
+    `;
   }
 </script>
 
 </body>
 </html>
+
+
 
