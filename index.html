@@ -106,31 +106,31 @@
 <script>
   const DISCOUNT_RATE = 0.15;
 
-  const products = [
-    { name: "Abbel iPhone", price: 73655 },
-    { name: "Samdanced Galaxy S24", price: 103300 },
-    { name: "EyePhone 15", price: 63400 },
-    { name: "Samdanced Reverse 8a", price: 95499 },
-    { name: "Google Tiphone 10", price: 52071 },
-    { name: "GasStation5 (GS5)", price: 46000 },
-    { name: "0 IQOO Z9 S", price: 47000 },
-    { name: "1 Minus 2T", price: 32200 },
-    { name: "OnePlus Nerd HighT", price: 29906 },
-    { name: "Aai Phone", price: 67049 },
-    { name: "Samsung Galaxji M35", price: 21100 },
-    { name: "NokiAI", price: 5000 },
-    { name: "Yaafle MyPhone", price: 83700 },
-    { name: "Pasta Bologanesh Book", price: 107000 },
-    { name: "Lenovo Dab", price: 27900 },
-    { name: "Apple Look", price: 24899 },
-    { name: "Shamsuddin S24 Ultra", price: 104000 },
-    { name: "Sonia TV", price: 15000 },
-    { name: "Sound EggPods", price: 3599 },
-    { name: "Xenon Urex 1", price: 35089 }
-    { name: "BELL PC Setup", price: 7000}
-  { name: "BELL PC Setup with Chair", price: 15999 }
+const products = [
+  { name: "Abbel iPhone", price: 73655 },
+  { name: "Samdanced Galaxy S24", price: 103300 },
+  { name: "EyePhone 15", price: 63400 },
+  { name: "Samdanced Reverse 8a", price: 95499 },
+  { name: "Google Tiphone 10", price: 52071 },
+  { name: "GasStation5 (GS5)", price: 46000 },
+  { name: "0 IQOO Z9 S", price: 47000 },
+  { name: "1 Minus 2T", price: 32200 },
+  { name: "OnePlus Nerd HighT", price: 29906 },
+  { name: "Aai Phone", price: 67049 },
+  { name: "Samsung Galaxji M35", price: 21100 },
+  { name: "NokiAI", price: 5000 },
+  { name: "Yaafle MyPhone", price: 83700 },
+  { name: "Pasta Bologanesh Book", price: 107000 },
+  { name: "Lenovo Dab", price: 27900 },
+  { name: "Apple Look", price: 24899 },
+  { name: "Shamsuddin S24 Ultra", price: 104000 },
+  { name: "Sonia TV", price: 15000 },
+  { name: "Sound EggPods", price: 3599 },
+  { name: "Xenon Urex 1", price: 35089 },  // <-- comma added here
+  { name: "BELL PC Setup", price: 7000 },  // <-- comma added
+  { name: "BELL PC Setup with Chair", price: 15999 }, // <-- comma added
   { name: "Something Headphones", price: 3785 }
-  ];
+];
 
   const select = document.getElementById('productSelect');
   const tbody = document.querySelector('#cartTable tbody');
