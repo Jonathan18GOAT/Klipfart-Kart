@@ -89,7 +89,7 @@
 
     <tfoot>
       <tr>
-        <td>Summer  Starter Deals (15% off)</td>
+        <td>Biriyani Bonanza Discount (15% off)</td>
         <td id="discountAmount">-₹0.00</td>
       </tr>
       <tr>
@@ -127,6 +127,9 @@
     { name: "Sonia TV", price: 15000 },
     { name: "Sound EggPods", price: 3599 },
     { name: "Xenon Urex 1", price: 35089 }
+    { name: "BELL PC Setup", price: 7000}
+  { name: "BELL PC Setup with Chair", price: 15999 }
+  { name: "Something Headphones", price: 3785 }
   ];
 
   const select = document.getElementById('productSelect');
@@ -186,7 +189,7 @@
     const total = subtotal - discount;
 
     thankyouMessage.innerHTML = `
-      ✅ Thank you! Your total after Winter Wonderland discount is
+      ✅ Thank you! Your total after the Biriyani Bonanza Discount is
       <strong>₹${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong>.
       Make payment <a href="https://sites.google.com/view/klipfartkart/home" target="_blank">here</a>.
     `;
