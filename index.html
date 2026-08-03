@@ -89,10 +89,6 @@
 
     <tfoot>
       <tr>
-        <td>Biriyani Bonanza Discount (15% off)</td>
-        <td id="discountAmount">-₹0.00</td>
-      </tr>
-      <tr>
         <td>Total Amount Payable</td>
         <td id="finalAmount">₹0.00</td>
       </tr>
@@ -185,11 +181,10 @@ const products = [
     }
 
     const subtotal = cart.reduce((sum, p) => sum + p.price, 0);
-    const discount = subtotal * DISCOUNT_RATE;
-    const total = subtotal - discount;
+    const total = subtotal;
 
     thankyouMessage.innerHTML = `
-      ✅ Thank you! Your total after the Biriyani Bonanza Discount is
+      ✅ Thank you! Your total is
       <strong>₹${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong>.
       Make payment <a href="https://sites.google.com/view/klipfartkart/home" target="_blank">here</a>.
     `;
